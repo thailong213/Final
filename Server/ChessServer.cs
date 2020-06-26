@@ -19,6 +19,8 @@ using System.Text;
 using ChessClient.Forms;
 using NATUPNPLib;
 
+//Thai Long da chinh suaa
+
 namespace Server {
     /// <summary>
     /// The server to send info to all the clients
