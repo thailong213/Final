@@ -1,0 +1,384 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Server</name>
+    </assembly>
+    <members>
+        <member name="T:Server.Games">
+            <summary>
+            Info about the game and the players
+            </summary>
+        </member>
+        <member name="P:Server.Games.Name">
+            <summary>
+            The name of the game
+            </summary>
+        </member>
+        <member name="F:Server.Games.Board">
+            <summary>
+            The board object to store the game information
+            </summary>
+        </member>
+        <member name="P:Server.Games.Player1Name">
+            <summary>
+            Name of player one
+            </summary>
+        </member>
+        <member name="F:Server.Games._player1Address">
+            <summary>
+            IP and port of player one
+            </summary>
+        </member>
+        <member name="P:Server.Games.Player2Name">
+            <summary>
+            Name of player two
+            </summary>
+        </member>
+        <member name="F:Server.Games._player2Address">
+            <summary>
+            IP and port of player two
+            </summary>
+        </member>
+        <member name="F:Server.Games.Audience">
+            <summary>
+            All players currently watching the game
+            </summary>
+        </member>
+        <member name="F:Server.Games.MoveHistory">
+            <summary>
+            List of all moves in the game
+            </summary>
+        </member>
+        <member name="F:Server.Games.Chat">
+            <summary>
+            List of all chat messages sent
+            </summary>
+        </member>
+        <member name="M:Server.Games.#ctor(System.String,ChessClient.Game.Board.Gametype,System.Tuple{System.Drawing.Color,System.Drawing.Color})">
+            <summary>
+            Create a new Games structure
+            </summary>
+            <param name="name">The name of the game</param>
+            <param name="mode">The mode of the game</param>
+            <param name="colours">The two colours of the game</param>
+        </member>
+        <member name="M:Server.Games.GetReceivers">
+            <summary>
+            Get all players connected to this game
+            </summary>
+            <returns>A list of IPs and ports that include player one, two and all audience</returns>
+        </member>
+        <member name="M:Server.Games.AddPlayerOne(System.String,System.Net.IPEndPoint)">
+            <summary>
+            Add Player One to this game
+            </summary>
+            <param name="name">The name of the player</param>
+            <param name="address">The ip and port of the player</param>
+        </member>
+        <member name="M:Server.Games.RemovePlayerOne">
+            <summary>
+            Remove player one from this game
+            </summary>
+        </member>
+        <member name="M:Server.Games.RemovePlayerTwo">
+            <summary>
+            Remove player two from this game
+            </summary>
+        </member>
+        <member name="M:Server.Games.RemovePlayer(System.String)">
+            <summary>
+            Remove a player from the game
+            </summary>
+            <param name="name">The name of the player to remove</param>
+        </member>
+        <member name="M:Server.Games.AddPlayerTwo(System.String,System.Net.IPEndPoint)">
+            <summary>
+            Add player two to this game
+            </summary>
+            <param name="name">The name of the player</param>
+            <param name="address">The ip and port of the player</param>
+        </member>
+        <member name="M:Server.Games.ToString">
+            <summary>
+            Convert the game to a readable format
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Server.ChessClient">
+            <summary>
+            The server to send info to all the clients
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._globalPacketId">
+            <summary>
+            Used as an unique identifier for sent packets
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._listener">
+            <summary>
+            The socket used to listen to the clients
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._client">
+            <summary>
+            The UdpClient used to send messages to the clients
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient.LocalPort">
+            <summary>
+            The port the server listens on
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._connected">
+            <summary>
+            A list of addresses and names for all connect players and their state
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._currentGames">
+            <summary>
+            List of games currently being played
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._filter">
+            <summary>
+            List of swearwords that get filtered (formatted for regex)
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._isRunning">
+            <summary>
+            Is the server running?
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._savingState">
+            <summary>
+            True when in the saving state when closing
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._waitingList">
+            <summary>
+            List of information about current threads waiting for players to connect
+            </summary> 
+        </member>
+        <member name="F:Server.ChessClient._history">
+            <summary>
+            History of received packets
+            </summary>
+        </member>
+        <member name="F:Server.ChessClient._gameHistory">
+            <summary>
+            List of all previously completed games, the players, and how they ended
+            </summary>
+        </member>
+        <member name="M:Server.ChessClient.EndAGame(System.String,System.String,System.String)">
+            <summary>
+            Format the ending of a game into the correct string, tell everyone about it then delete it
+            </summary>
+            <param name="gameName">The name of the game</param>
+            <param name="winner">The winner of the game</param>
+            <param name="reason">The reason the game has ended</param>
+        </member>
+        <member name="M:Server.ChessClient.#ctor">
+            <summary>
+            Create a new Server object
+            </summary>
+        </member>
+        <member name="M:Server.ChessClient.CommandInterpreter">
+            <summary>
+            Interprets commands and loops until server is stopped
+            </summary>
+        </member>
+        <member name="M:Server.ChessClient.InterpretData(System.Net.IPEndPoint,System.Collections.Generic.IEnumerable{System.Byte})">
+            <summary>
+            Interpret any received data and act accordingly
+            </summary>
+            <param name="address">The address the data came from</param>
+            <param name="data">The data received</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretConnect(ChessClient.Net.Packet,System.String@)">
+            <summary>
+            Interpret a Connect packet
+            </summary>
+            <param name="packet">The packet to interpret</param>
+            <param name="nameForUser">The name associated with the player</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretDisconnect(ChessClient.Net.Packet,System.String@)">
+            <summary>
+            Interpret a disconnect packet
+            </summary>
+            <param name="packet">The packet to interpret</param>
+            <param name="nameForUser">The name associated with the player</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretChat(ChessClient.Net.Packet)">
+            <summary>
+            Interpret a chat packet
+            </summary>
+            <param name="packet">The packet to interpret</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretDisconnectGame(ChessClient.Net.Packet,System.String)">
+            <summary>
+            Interpret a disconnect game packet
+            </summary>
+            <param name="packet">The packet to interpret</param>
+            <param name="nameForUser">The name associated with the player</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretGameEnd(ChessClient.Net.Packet)">
+            <summary>
+            Interpret a Game end packet
+            </summary>
+            <param name="packet">The packet to interpret</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretGame(ChessClient.Net.Packet,System.String)">
+            <summary>
+            Interpret a packet with a "Game" code
+            </summary>
+            <param name="packet">The packet to interpret</param>
+            <param name="nameForUser">The name associated with the player</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretAddGame(ChessClient.Net.Packet)">
+            <summary>
+            Interpret a Game packet that is adding a game
+            </summary>
+            <param name="packet">The packet to interpret</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretGetGame(ChessClient.Net.Packet)">
+            <summary>
+            Interpret a Game packet that is requesting a game
+            </summary>
+            <param name="packet">The packet to interpret</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretWatchGame(ChessClient.Net.Packet,System.String)">
+            <summary>
+            Interpret a Game packet that is requesting to watch a game
+            </summary>
+            <param name="packet">The packet to interpret</param>
+            /// <param name="nameForUser">The name associated with the player</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretJoinGame(ChessClient.Net.Packet,System.String)">
+            <summary>
+            Interpret a Game packet that is requesting to join a game
+            </summary>
+            <param name="packet">The packet to interpret</param>
+            <param name="nameForUser">The name of the player that the packet came from</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretMovePiece(ChessClient.Net.Packet)">
+            <summary>
+            Interpret a Game packet that is moving a piece
+            </summary>
+            <param name="packet">The packet to interpret</param>
+        </member>
+        <member name="M:Server.ChessClient.InterpretSpecialCase(ChessClient.Game.Piece,Server.Games,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Interpret a piece's movement to determine a special case
+            </summary>
+            <param name="piece">The piece that is moving</param>
+            <param name="replacementGame">The game object that contains the board</param>
+            <param name="x">The original x of the piece</param>
+            <param name="y">The original y of the piece</param>
+            <param name="y1">The destination y of the piece</param>
+            <returns>The modified game object</returns>
+        </member>
+        <member name="M:Server.ChessClient.InterpretTakeBack(ChessClient.Net.Packet)">
+            <summary>
+            Interpret a Game packet that is requesting to redo a move
+            </summary>
+            <param name="packet">The packet to interpret</param>
+        </member>
+        <member name="M:Server.ChessClient.SendGame(System.Net.IPEndPoint,Server.Games)">
+            <summary>
+            Send a game to a client
+            </summary>
+            <param name="address">The client to send to</param>
+            <param name="game">The game to send</param>
+        </member>
+        <member name="M:Server.ChessClient.SendPacket(System.Net.IPEndPoint,ChessClient.Net.Packet)">
+            <summary>
+            Send a packet to a client in return
+            </summary>
+            <param name="address">The client to send to</param>
+            <param name="packet">The packet to send</param>
+        </member>
+        <member name="M:Server.ChessClient.MapToIPv4(System.Net.IPEndPoint)">
+            <summary>
+            Convert an IPv6 address to its IPv4 equivalent. (Fix for .NET implementation of MapToIPv4)
+            </summary>
+            <param name="address">The address to convert</param>
+            <returns>IPENDPOINT: An IPv4 address and port</returns>
+        </member>
+        <member name="M:Server.ChessClient.SendPacket(System.Net.IPEndPoint,ChessClient.Net.Packet.Packets,ChessClient.Net.Packet,System.String[])">
+            <summary>
+            Send a packet to a client in return
+            </summary>
+            <param name="address">The client to send to</param>
+            <param name="code">The packet code</param>
+            <param name="recieve">The packet that was received from the client</param>
+            <param name="sendMessages">The message to send</param>
+        </member>
+        <member name="M:Server.ChessClient.SendPacket(System.Net.IPEndPoint,ChessClient.Net.Packet.Packets,System.String,System.String[])">
+            <summary>
+            Send a packet to a client with a fake return message
+            </summary>
+            <param name="address">The client to send to</param>
+            <param name="code">The packet code</param>
+            <param name="fakeMessage">The fake message</param>
+            <param name="sendMessages">The message to send</param>
+        </member>
+        <member name="M:Server.ChessClient.SendPacketToAllPlayers(System.Net.IPEndPoint,ChessClient.Net.Packet.Packets,System.String,System.String[])">
+            <summary>
+            Send a packet to all connect players
+            </summary>
+            <param name="address">An optional parameter to exclude a client from the message</param>
+            <param name="code">The packet code</param>
+            <param name="fakeMessage">The fake message</param>
+            <param name="sendMessages">The message to send</param>
+        </member>
+        <member name="M:Server.ChessClient.SendPacketToPlayers(ChessClient.Net.Packet.Packets,System.Collections.Generic.IEnumerable{System.Net.IPEndPoint},System.String,System.String[])">
+            <summary>
+            Send a packet to a list of players
+            </summary>
+            <param name="code">The packet code</param>
+            <param name="players">The list of client to send to</param>
+            <param name="fakeMessage">The fake message</param>
+            <param name="sendMessages">The message to send</param>
+        </member>
+        <member name="M:Server.ChessClient.GetFilter(System.String)">
+            <summary>
+            Get a filtered version of a word
+            </summary>
+            <param name="orignal">The original word</param>
+            <returns>STRING: A filtered word</returns>
+        </member>
+        <member name="M:Server.ChessClient.WaitForPlayer(System.String,System.String,System.String)">
+            <summary>
+            Wait for a player to come online and join a game
+            </summary>
+            <param name="playerName">The player to wait for</param>
+            <param name="gameName">The name of the game they have to join</param>
+            <param name="message">The message to send to them when they connect</param>
+        </member>
+        <member name="M:Server.ChessClient.CommandSyntax(System.Collections.Generic.IReadOnlyCollection{System.String},System.Int32,System.String)">
+            <summary>
+            Check syntax and display error message
+            </summary>
+            <param name="command">The command inputted</param>
+            <param name="syntaxNumber">The amount of variables there should be</param>
+            <param name="properSyntax">The syntax that should be used</param>
+            <returns>BOOL: If the command is the proper syntax</returns>
+        </member>
+        <member name="M:Server.ChessClient.Dispose">
+            <summary>
+            Dispose of the server object
+            </summary>
+        </member>
+        <member name="M:Server.ChessClient.Dispose(System.Boolean)">
+            <summary>
+            Dispose of the server object
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:Server.ChessClient.Main">
+            <summary>
+            Main method
+            </summary>
+        </member>
+    </members>
+</doc>
