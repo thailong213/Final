@@ -28,31 +28,26 @@ namespace Connect_SQL
             com.Connection = con;
             com.CommandText = "select * from AUTH";
             SqlDataReader dr = com.ExecuteReader();
-            while (dr.Read())
-            {
+            while (dr.Read()){
                 for(int i=0 ; i<=dr.FieldCount ; i++)
                 {
                     if (txtUsername.Text.Equals(dr["Username"].ToString().TrimEnd()) &&
-                        txtPassword.Text.Equals(dr["Password"].ToString().TrimEnd()))
-                    {
+                        txtPassword.Text.Equals(dr["Password"].ToString().TrimEnd())){
                         MessageBox.Show("Congrates", "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Transfer a = new Transfer();
                         a.Show();
                         this.Hide();
                         break;
                     }
-                    else
-                    {
+                    else{
                         MessageBox.Show("Fail", "fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
                 }
             }
-            con.Close();
-        }
+            con.Close();}
 
-        private void button2_Click(object sender, EventArgs e)
-        {
+        private void button2_Click(object sender, EventArgs e){
             Register a = new Register();
             a.Show();
             this.Hide();
