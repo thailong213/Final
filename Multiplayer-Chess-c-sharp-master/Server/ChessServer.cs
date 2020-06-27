@@ -321,6 +321,7 @@ namespace Server {
             // Don't display message if can't get address
             if (packet.SenderAddress == null) return;
             // Display the message
+            
             if (packet.Code == Packet.Packets.Connect)
                 Console.WriteLine("[" + MapToIPv4(packet.SenderAddress).Address + ":" + packet.SenderAddress.Port + "/" + nameForUser + "] - (" + (packet.Code) + ") - " + string.Join(",", packet.Message) + " @ " + TimeZone.CurrentTimeZone.ToLocalTime(DateTime.Now));
             else
