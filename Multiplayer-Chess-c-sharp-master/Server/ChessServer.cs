@@ -79,6 +79,7 @@ namespace Server {
         /// </summary>
         /// <param name="gameName">The name of the game</param>
         /// <param name="winner">The winner of the game</param>
+        
         /// <param name="reason">The reason the game has ended</param>
         private void EndAGame(string gameName, string winner, string reason) {
             foreach (var game in _currentGames.Where(game => game.Name.Equals(gameName))) {
