@@ -7,6 +7,7 @@ using ChessClient.Net;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+//
 
 namespace ChessAI {
     public class ChessGame {
