@@ -1,0 +1,13 @@
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\bin\Debug\ChessAI.exe.config
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\bin\Debug\ChessAI.exe
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\bin\Debug\ChessAI.pdb
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\bin\Debug\Chess.exe
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\bin\Debug\Interop.NATUPNPLib.dll
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\bin\Debug\Chess.pdb
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\bin\Debug\Chess.xml
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\bin\Debug\Chess.exe.config
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\obj\Debug\ChessAI.csprojAssemblyReference.cache
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\obj\Debug\ChessAI.csproj.CoreCompileInputs.cache
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\obj\Debug\ChessAI.csproj.CopyComplete
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\obj\Debug\ChessAI.exe
+G:\Multiplayer-Chess-c-sharp-master\ChessAI\obj\Debug\ChessAI.pdb

@@ -1,0 +1,1452 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chess</name>
+    </assembly>
+    <members>
+        <member name="T:ChessClient.FastBitmap">
+            <summary>
+            A improvement on the Bitmap class to perform pixel editing faster
+            </summary>
+        </member>
+        <member name="M:ChessClient.FastBitmap.#ctor(System.Drawing.Bitmap)">
+            <summary>
+            Create a new FastBitmap
+            </summary>
+            <param name="bitmap">The bitmap.</param>
+        </member>
+        <member name="P:ChessClient.FastBitmap.Height">
+            <summary>
+            The height of the bitmap
+            </summary>
+        </member>
+        <member name="P:ChessClient.FastBitmap.InternalBitmap">
+            <summary>
+            The original bitmap that was superseded
+            </summary>
+        </member>
+        <member name="P:ChessClient.FastBitmap.Width">
+            <summary>
+            The width of the bitmap
+            </summary>
+        </member>
+        <member name="P:ChessClient.FastBitmap.Data">
+            <summary>
+            The attributes of the bitmap
+            </summary>
+        </member>
+        <member name="P:ChessClient.FastBitmap.DataPointer">
+            <summary>
+            A pointer to the memory containing the bitmap
+            </summary>
+        </member>
+        <member name="P:ChessClient.FastBitmap.PixelSize">
+            <summary>
+            The size in bytes of each pixel
+            </summary>
+        </member>
+        <member name="M:ChessClient.FastBitmap.Lock">
+            <summary>
+            Lock the bitmap to edit it through memory
+            </summary>
+        </member>
+        <member name="M:ChessClient.FastBitmap.GetPixelSize">
+            <summary>
+            Get the size of the pixels in bytes
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ChessClient.FastBitmap.Unlock">
+            <summary>
+            Unlocks the bitmap to return the original bitmap
+            </summary>
+            <returns>The bitmap after finishing the edit</returns>
+        </member>
+        <member name="M:ChessClient.FastBitmap.GetPixel(System.Int32,System.Int32)">
+            <summary>
+            Get the colour of the pixel at a position
+            </summary>
+            <param name="x">The x coord of the pixel to get</param>
+            <param name="y">The y coord of the pixel to get</param>
+            <returns>The colour of the pixel</returns>
+        </member>
+        <member name="M:ChessClient.FastBitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Set the colour of the pixel at a position
+            </summary>
+            <param name="x">The x coord of the pixel to set</param>
+            <param name="y">The y coord of the pixel to set</param>
+            <param name="pixelColor">The new colour of the pixel</param>
+        </member>
+        <member name="T:ChessClient.BitmapExtension">
+            <summary>
+            Class to house the Colourize extension method
+            </summary>
+        </member>
+        <member name="M:ChessClient.BitmapExtension.Colorize(System.Drawing.Bitmap,System.Drawing.Color[])">
+            <summary>
+            Converts a monochrome image into the colours in the parsed array
+            </summary>
+            <param name="originalImage">The image to convert</param>
+            <param name="colors">The colours to convert to</param>
+            <returns>BITMAP: The parsed image in the new colours</returns>
+        </member>
+        <member name="T:ChessClient.Forms.BoardDisplayForm">
+            <summary>
+            Form to display the game
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._allImages">
+            <summary>
+            All the images for the chess pieces
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._rectangles">
+            <summary>
+            An array of rectangles and if they are Player 2's colour
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._playerOne">
+            <summary>
+            If this client is player one. (White)
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._playing">
+            <summary>
+            If this client is playing or spectating
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._hightlightSquares">
+            <summary>
+            A list of all squares that need to be highlighted a different colour
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._moves">
+            <summary>
+            A display of all moves of the game
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm.Chat">
+            <summary>
+            A display of all the chat messages
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._chatMessage">
+            <summary>
+            User input for chat messages
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._sendMessage">
+            <summary>
+            Send button for chat messages
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._highlightCoord">
+            <summary>
+            The coordinate of the rectangle that has the mouse in
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm.GameName">
+            <summary>
+            The name of this game
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._board">
+            <summary>
+            The board object that contains all piece and colour information
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm.Client">
+            <summary>
+            The client to send messages to the server
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._proposeTakeback">
+            <summary>
+            Button to propose a take back of a move
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._requestDraw">
+            <summary>
+            Button to propose a draw
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._resignGame">
+            <summary>
+            Button to end the game with your lose
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.BoardDisplayForm._leaveGame">
+            <summary>
+            Button to leave the game
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.#ctor(ChessClient.Net.Client,ChessClient.Game.Board,System.Nullable{System.Boolean},System.String)">
+            <summary>
+            Create a new BoardDisplayForm
+            </summary>
+            <param name="client">The client for the current player</param>
+            <param name="board">The board object to display</param>
+            <param name="player">Whether this player is player one, player two, or a spectator</param>
+            <param name="name">The name of this game</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.AssignEvents">
+            <summary>
+            Assigns events
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.SetupControls">
+            <summary>
+            Setup the controls on the form
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.SendMessage(System.Object,System.EventArgs)">
+            <summary>
+            Add the clients name to the message and sends it to the server
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.WndProc(System.Windows.Forms.Message@)">
+            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process. </param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.ColourMinus(System.Drawing.Color,System.Drawing.Color)">
+            <summary>
+            Minus one colour from another
+            </summary>
+            <param name="colour1">The main colour</param>
+            <param name="colour2">The colour to minus from colour1</param>
+            <returns>COLOR: colour1-colour2</returns>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.ColourAdd(System.Drawing.Color,System.Drawing.Color)">
+            <summary>
+            Adds one colour to another
+            </summary>
+            <param name="colour1">The main colour</param>
+            <param name="colour2">The colour to add from colour1</param>
+            <returns>COLOR: colour1+colour2</returns>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.PaintBoard(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Draws the Squares, the grid references and the pieces (taken and in play)
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.ResizeBoard(System.Object,System.EventArgs)">
+            <summary>
+            Changes the layout of the controls when the form is resized
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.BoardMouseClick(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Handles mouse clicks on the board
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="T:ChessClient.Forms.BoardDisplayForm.ObjectMovePieceDelegate">
+            <summary>
+            Delegate object to refresh the screen
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.MovePieceDelegate(System.Int32,System.Int32)">
+            <summary>
+            Try and refresh the screen
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.MovePiece(System.Int32,System.Int32)">
+            <summary>
+            Move a piece on a local board
+            </summary>
+            <param name="startIndex">The index the piece moves from</param>
+            <param name="endIndex">The index the piece moves to</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.FakeMove(System.String)">
+            <summary>
+            Add a string to the moves list box
+            </summary>
+            <param name="s">The string to add</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.FakeRemove">
+            <summary>
+            Remove a the last move in the move list
+            </summary>
+        </member>
+        <member name="T:ChessClient.Forms.BoardDisplayForm.ObjectRefreshDelegate">
+            <summary>
+            Delegate object to refresh the screen
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.RefreshDelegate">
+            <summary>
+            Try and refresh the screen
+            </summary>
+        </member>
+        <member name="T:ChessClient.Forms.BoardDisplayForm.ObjectUpdateTitleDelegate">
+            <summary>
+            Delegate object to update the form title
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.UpdateTitleDelegate(System.String,System.String,System.String)">
+            <summary>
+            Try and update the form title
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.MovePiece(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Move a piece and swap player turn
+            </summary>
+            <param name="startIndex">The index the piece moves from</param>
+            <param name="endIndex">The index the piece moves to</param>
+            <param name="turn">If it is player ones turn</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.SpecialRemove(System.Int32)">
+            <summary>
+            Remove a piece from the board without it being taken
+            </summary>
+            <param name="pieceIndex">What square the piece is in</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.SpecialAdd(System.Int32,System.String,System.String)">
+            <summary>
+            Add a piece to the board
+            </summary>
+            <param name="pieceIndex">The square to add the piece to</param>
+            <param name="pieceName">The name of the piece type</param>
+            <param name="owner">What colour it should be, null for promotion</param>
+        </member>
+        <member name="M:ChessClient.Forms.BoardDisplayForm.ToDisplay(System.Int32)">
+            <summary>
+            Convert the usable 1D value into a readable format
+            </summary>
+            <param name="index">Value to convert</param>
+            <returns>STRING: Letter Number pair</returns>
+        </member>
+        <member name="T:ChessClient.Forms.ColourPickerForm">
+            <summary>
+            Form to pick a colour scheme for a game
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.ColourPickerForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ColourPickerForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="P:ChessClient.Forms.ColourPickerForm.SelectedCol1">
+            <summary>
+            The colour selected for Black
+            </summary>
+        </member>
+        <member name="P:ChessClient.Forms.ColourPickerForm.SelectedCol2">
+            <summary>
+            The colour selected for White
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ColourPickerForm.#ctor">
+            <summary>
+            Create a new ColourPickerForm
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ColourPickerForm.KeyCheck(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Checks if you pressed and number key
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="M:ChessClient.Forms.ColourPickerForm.TextCheck(System.Object,System.EventArgs)">
+            <summary>
+            Force 255 limit and update the slider
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="M:ChessClient.Forms.ColourPickerForm.SliderChanged(System.Object,System.EventArgs)">
+            <summary>
+            Update the textbox when the slider moves
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="M:ChessClient.Forms.ColourPickerForm.ColorStructToList">
+            <summary>
+            Uses reflection to get every Colour in System.Drawing.Color
+            </summary>
+            <returns>LIST[COLOR]: Every predefined colour</returns>
+        </member>
+        <member name="M:ChessClient.Forms.ColourPickerForm.PaintColours(System.Object,System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Draw the selected colours as a gradient in a box
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="T:ChessClient.Forms.ConnectForm">
+            <summary>
+            Form to enter details to connect to the server
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.ConnectForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ConnectForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ChessClient.Forms.ConnectForm.#ctor">
+            <summary>
+            Create a new ConnectForm
+            </summary>
+        </member>
+        <member name="T:ChessClient.Forms.GameCreatorForm">
+            <summary>
+            Form to create a new game
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.GameCreatorForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.GameCreatorForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="F:ChessClient.Forms.GameCreatorForm.Client">
+            <summary>
+            The client to send/receive packets to/from the server
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.GameCreatorForm.#ctor(ChessClient.Net.Client)">
+            <summary>
+            Create a new GameCreatorForm
+            </summary>
+            <param name="client">The client used to connect to the server</param>
+        </member>
+        <member name="T:ChessClient.Forms.GameModifierForm">
+            <summary>
+            Form to create a new game rule or starting position
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.GameModifierForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.GameModifierForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ChessClient.Forms.GameModifierForm.#ctor">
+            <summary>
+            Create a new GameModifierForm
+            </summary>
+        </member>
+        <member name="T:ChessClient.Forms.PromotionMenuForm">
+            <summary>
+            Menu for choosing outcome of pawn promotion
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.PromotionMenuForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.PromotionMenuForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="P:ChessClient.Forms.PromotionMenuForm.Chosen">
+            <summary>
+            Stores the Piece chosen
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.PromotionMenuForm.#ctor">
+            <summary>
+            Creates a new PromotionMenuForm
+            </summary>
+        </member>
+        <member name="T:ChessClient.Forms.ServerDisplayForm">
+            <summary>
+            Form to display the games list and other server info
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.ServerDisplayForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="F:ChessClient.Forms.ServerDisplayForm.OpenGamesList">
+            <summary>
+            List of game from the server
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.ServerDisplayForm.Colours">
+            <summary>
+            List of the colours for the game list
+            </summary>
+        </member>
+        <member name="F:ChessClient.Forms.ServerDisplayForm.ConnectedPlayers">
+            <summary>
+            Display the currently connect players
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.#ctor(ChessClient.Net.Client)">
+            <summary>
+            Create a new ServerDisplayForm
+            </summary>
+            <param name="client">The player's client</param>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.ResetListView">
+            <summary>
+            Refresh the list of games
+            </summary>
+        </member>
+        <member name="T:ChessClient.Forms.ServerDisplayForm.ObjectResetDelegate">
+            <summary>
+            Delegate object to reset the list view
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.ResetDelegate">
+            <summary>
+            Try and reset the list view
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.SortGames(System.Collections.Generic.List{System.String})">
+            <summary>
+            Sort the list of games
+            </summary>
+            <param name="list">The list of game display names to sort</param>
+            <returns>LIST[STRING]: A list of sorted strings</returns>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.Quicksort(System.Collections.Generic.IList{System.String},System.Int32,System.Int32)">
+            <summary>
+            Quicksort
+            </summary>
+            <param name="elements">List of strings</param>
+            <param name="left">Where to start the left pivot</param>
+            <param name="right">Where to start the right pivot</param>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.WatchGame">
+            <summary>
+            Try and watch a game
+            </summary>
+            <returns>BOOL: Whether the server accepted the request</returns>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.JoinGame">
+            <summary>
+            Try and join a game
+            </summary>
+            <returns>BOOL: Whether the server accepted the request</returns>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.RefreshLists">
+            <summary>
+            Update the players and games list boxes
+            </summary>
+        </member>
+        <member name="T:ChessClient.Forms.ServerDisplayForm.ObjectRefreshDelegate">
+            <summary>
+            Delegate object to refresh the screen
+            </summary>
+        </member>
+        <member name="M:ChessClient.Forms.ServerDisplayForm.RefreshDelegate">
+            <summary>
+            Try and refresh the screen
+            </summary>
+        </member>
+        <member name="T:ChessClient.Game.Bishop">
+            <summary>
+            The Bishop piece
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Bishop.#ctor(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Create a new Bishop
+            </summary>
+            <param name="x">The x coord of the piece</param>
+            <param name="y">The y coord of the piece</param>
+            <param name="colour">The colour of the piece</param>
+        </member>
+        <member name="M:ChessClient.Game.Bishop.GetMoves(ChessClient.Game.Board,System.Boolean)">
+            <summary>
+            Get all possible moves including moves that cause friendly king to be in check
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="check">Whether to remove moves that endanger king (can cause recursion errors)</param>
+        </member>
+        <member name="T:ChessClient.Game.Board">
+            <summary>
+            Board containing all game information
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.Null">
+            <summary>
+            Returned if no piece available
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.Error">
+            <summary>
+            Returned if there was an error trying to get a piece
+            </summary>
+        </member>
+        <member name="P:ChessClient.Game.Board.BlackColour">
+            <summary>
+            The colour of the "Black" Pieces
+            </summary>
+        </member>
+        <member name="P:ChessClient.Game.Board.WhiteColour">
+            <summary>
+            The colour of the "White" Pieces
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.PlayerOneTurn">
+            <summary>
+            If it is currently player one's turn to move
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board._mode">
+            <summary>
+            Which mode this game is being played in
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.Pieces">
+            <summary>
+            List of Pieces on the Board
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.LastMove">
+            <summary>
+            First index and last index of the last move
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.LastPiece">
+            <summary>
+            The last piece that was taken
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.TakenPieces">
+            <summary>
+            List of piece that have been taken
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.FiftyMoveRule">
+            <summary>
+            Keeps track of how many moves since a pawn moved or a piece was taken
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Board.#ctor(System.Drawing.Color,System.Drawing.Color,ChessClient.Game.Board.Gametype)">
+            <summary>
+            Create a new Board
+            </summary>
+            <param name="colour1">The new black colour</param>
+            <param name="colour2">The new white colour</param>
+            <param name="mode">The new game mode</param>
+        </member>
+        <member name="M:ChessClient.Game.Board.#ctor(System.Drawing.Color,System.Drawing.Color,ChessClient.Game.Board.Gametype,System.Collections.Generic.List{ChessClient.Game.Piece})">
+            <summary>
+            Create a new Board
+            </summary>
+            <param name="colour1">The new black colour</param>
+            <param name="colour2">The new White colour</param>
+            <param name="mode">The new game mode</param>
+            <param name="pieces">Use these pieces instead of creating new ones</param>
+        </member>
+        <member name="M:ChessClient.Game.Board.CreateBoard">
+            <summary>
+            Populate the board with pieces based on game mode
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Board.CheckCheck(System.Drawing.Color)">
+            <summary>
+            Loops through every piece in Pieces, checks if they match the colour parsed, 
+            and if any of them can take the other colours king.
+            </summary>
+            <param name="colour">The colour of the piece to check if can take opponents King</param>
+            <returns>BOOL: If the other colour (not parsed), is in check</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.CheckCheckMate(System.Drawing.Color)">
+            <summary>
+            Loops through every piece in Pieces, checks if they match the colour parsed, 
+            and if all of them have no moves to make.
+            </summary>
+            <param name="colour">The colour of the piece to check if in checkmate</param>
+            <returns>BOOL: If the colour parsed can make any moves (checkmate)</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.EndangerKing(ChessClient.Game.Piece,System.Tuple{System.Int32,System.Int32})">
+            <summary>
+            Checks if the move parsed will cause the piece parsed colours king to be in check.
+            </summary>
+            <param name="piece">The piece to move</param>
+            <param name="move">The destination coordinate to check</param>
+            <returns>BOOL: If moving the piece to the destination will cause the same colour piece to be in check</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.GetPiece(System.Int32,System.Int32)">
+            <summary>
+            Loop through every Piece and return one that matches the x and y coords parsed
+            </summary>
+            <param name="x">X coordinate of piece</param>
+            <param name="y">Y coordinate of piece</param>
+            <returns>PIECE: The piece in Pieces which is at the same coordinate as parsed</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.IsEmptyAndValid(System.Int32,System.Int32)">
+            <summary>
+            Checks if the square is empty and if it is valid
+            </summary>
+            <param name="x">The X coordinate to check</param>
+            <param name="y">The Y coordinate to check</param>
+            <returns>BOOL: If the chosen square is empty and within the board</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.IsNotFriendlyAndValid(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Checks if the square has a friendly piece and if it is valid
+            </summary>
+            <param name="x">The X coordinate to check</param>
+            <param name="y">The Y coordinate to check</param>
+            <param name="colour">The colour to check if friendly to</param>
+            <returns>BOOL: If the chosen square does not have a friendly piece and is within the board</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.IsNotEmptyAndNotFriendly(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Checks if the square is empty and friendly
+            </summary>
+            <param name="x">The X coordinate to check</param>
+            <param name="y">The X coordinate to check</param>
+            <param name="colour">The colour to check if friendly to</param>
+            <returns>BOOL: If the chosen square has a piece in and it is not friendly</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.IsValid(System.Int32,System.Int32)">
+            <summary>
+            Checks if the square is valid
+            </summary>
+            <param name="x">The X coordinate to check</param>
+            <param name="y">The Y coordinate to check</param>
+            <returns>BOOL: If the chosen square is within the board</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.IsSquareEmpty(System.Int32,System.Int32)">
+            <summary>
+            Checks if the square is empty
+            </summary>
+            <param name="x">The X coordinate to check</param>
+            <param name="y">The Y coordinate to check</param>
+            <returns>BOOL: If the chosen square does not contain a piece</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.IsSquareFriendly(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Checks if the square is friendly
+            </summary>
+            <param name="x">The X coordinate to check</param>
+            <param name="y">The Y coordinate to check</param>
+            <param name="colour">The colour to check if friendly to</param>
+            <returns>BOOL: If the chosen square's piece is the same as parsed</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.Serialize">
+            <summary>
+            Convert the Board object to an array of bytes
+            </summary>
+            <returns>A compressed array of Bytes containing the current board object</returns>
+        </member>
+        <member name="M:ChessClient.Game.Board.UnSerialize(System.Collections.Generic.IEnumerable{System.Byte})">
+            <summary>
+            Returns a new Board object
+            </summary>
+            <param name="board">A previously serialized and compressed board object</param>
+            <returns>BOARD: A board from the parsed byte array</returns>
+        </member>
+        <member name="T:ChessClient.Game.Board.Gametype">
+            <summary>
+            An Enum of possible chess modes
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.Gametype.Normal">
+            <summary>
+            A normal game
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.Gametype.Chess960">
+            <summary>
+            The Chess960 game mode
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.Gametype.Siege">
+            <summary>
+            The Siege game mode
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Board.Gametype.DontCreate">
+            <summary>
+            Don't create any pieces
+            </summary>
+        </member>
+        <member name="T:ChessClient.Game.King">
+            <summary>
+            The King piece
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.King.#ctor(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Create a new King
+            </summary>
+            <param name="x">The x coord of the piece</param>
+            <param name="y">The y coord of the piece</param>
+            <param name="colour">The colour of the piece</param>
+        </member>
+        <member name="M:ChessClient.Game.King.GetMoves(ChessClient.Game.Board,System.Boolean)">
+            <summary>
+            Get all possible moves including moves that cause friendly king to be in check
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="check">Whether to remove moves that endanger king (can cause recursion errors)</param>
+        </member>
+        <member name="T:ChessClient.Game.Knight">
+            <summary>
+            The Knight piece
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Knight.#ctor(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Create a new Knight
+            </summary>
+            <param name="x">The x coord of the piece</param>
+            <param name="y">The y coord of the piece</param>
+            <param name="colour">The colour of the piece</param>
+        </member>
+        <member name="M:ChessClient.Game.Knight.GetMoves(ChessClient.Game.Board,System.Boolean)">
+            <summary>
+            Get all possible moves including moves that cause friendly king to be in check
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="check">Whether to remove moves that endanger king (can cause recursion errors)</param>
+        </member>
+        <member name="T:ChessClient.Game.Pawn">
+            <summary>
+            The pawn piece
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Pawn.#ctor(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Create a new Pawn
+            </summary>
+            <param name="x">The x coord of the piece</param>
+            <param name="y">The y coord of the piece</param>
+            <param name="colour">The colour of the piece</param>
+        </member>
+        <member name="M:ChessClient.Game.Pawn.GetMoves(ChessClient.Game.Board,System.Boolean)">
+            <summary>
+            Get all possible moves including moves that cause friendly king to be in check
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="check">Whether to remove moves that endanger king (can cause recursion errors)</param>
+        </member>
+        <member name="T:ChessClient.Game.Piece">
+            <summary>
+            The base for every piece
+            </summary>
+        </member>
+        <member name="P:ChessClient.Game.Piece.X">
+            <summary>
+            The X coordinate of the Piece
+            </summary>
+        </member>
+        <member name="P:ChessClient.Game.Piece.Y">
+            <summary>
+            The Y coordinate of the Piece
+            </summary>
+        </member>
+        <member name="P:ChessClient.Game.Piece.Owner">
+            <summary>
+            The colour of the pieces owner
+            </summary>
+        </member>
+        <member name="P:ChessClient.Game.Piece.PieceType">
+            <summary>
+            Which piece it is
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Piece.Moves">
+            <summary>
+            List of possible moves this piece can do
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Piece.MoveCount">
+            <summary>
+            The amount of times a piece this piece has moved
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Piece.#ctor(System.Int32,System.Int32,System.Drawing.Color,ChessClient.Game.Pieces)">
+            <summary>
+            Create a new piece
+            </summary>
+            <param name="x">The new X coordinate of the piece</param>
+            <param name="y">The new Y coordinate of the piece</param>
+            <param name="colour">The new colour of the piece</param>
+            <param name="piece">What piece it is</param>
+        </member>
+        <member name="M:ChessClient.Game.Piece.GetMoves(ChessClient.Game.Board,System.Boolean)">
+            <summary>
+            Get all possible moves including moves that cause friendly king to be in check
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="check">Whether to remove moves that endanger king (can cause recursion errors)</param>
+        </member>
+        <member name="M:ChessClient.Game.Piece.RemoveBad(ChessClient.Game.Board)">
+            <summary>
+            Removes all moves that endanger your sides king
+            </summary>
+            <param name="board">The board that this piece is on</param>
+        </member>
+        <member name="M:ChessClient.Game.Piece.CheckCheck(ChessClient.Game.Board)">
+            <summary>
+            Check if this piece takes an opposing king
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <returns>BOOL: If this piece can take a king</returns>
+        </member>
+        <member name="M:ChessClient.Game.Piece.Move(ChessClient.Game.Board,System.Int32,System.Int32)">
+            <summary>
+            Move the piece to a new position
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="x">The new X coordinate of the Piece</param>
+            <param name="y">The new Y coordinate of the Piece</param>
+        </member>
+        <member name="M:ChessClient.Game.Piece.Clone(ChessClient.Game.Piece)">
+            <summary>
+            Copy all relevant properties to a new Piece
+            </summary>
+            <param name="piece">The piece to copy from</param>
+            <returns>PIECE: A new piece with the same values as parsed</returns>
+        </member>
+        <member name="M:ChessClient.Game.Piece.Equals(System.Object)">
+            <summary>
+            Determines whether the specified Piece is equal to the current Piece.
+            </summary>
+            <returns>
+            true if the specified object  is equal to the current object; otherwise, false.
+            </returns>
+            <param name="obj">The object to compare with the current object.</param>
+        </member>
+        <member name="M:ChessClient.Game.Piece.GetHashCode">
+            <summary>
+            Serves as a hash function for a particular type. 
+            </summary>
+            <returns>
+            A hash code for the current Piece.
+            </returns>
+        </member>
+        <member name="T:ChessClient.Game.Nullpiece">
+            <summary>
+            A Piece only used instead of null.
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Nullpiece.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Create a new Null piece
+            </summary>
+            <param name="a">It's fake x coord</param>
+            <param name="b">It's fake y coord</param>
+        </member>
+        <member name="M:ChessClient.Game.Nullpiece.GetMoves(ChessClient.Game.Board,System.Boolean)">
+            <summary>
+            Get all possible moves including moves that cause friendly king to be in check
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="check">Whether to remove moves that endanger king (can cause recursion errors)</param>
+        </member>
+        <member name="T:ChessClient.Game.Pieces">
+            <summary>
+            An Enum of possible chess pieces
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Pieces.Rook">
+            <summary>
+            The rook piece (castle)
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Pieces.Bishop">
+            <summary>
+            The bishop piece (pointy hat)
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Pieces.Queen">
+            <summary>
+            The queen piece (point crown)
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Pieces.King">
+            <summary>
+            The king piece (single point crown)
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Pieces.Knight">
+            <summary>
+            The knight piece (horse)
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Pieces.Pawn">
+            <summary>
+            The pawn piece (front ones)
+            </summary>
+        </member>
+        <member name="F:ChessClient.Game.Pieces.Null">
+            <summary>
+            Null piece
+            </summary>
+        </member>
+        <member name="T:ChessClient.Game.Queen">
+            <summary>
+            The Queen Piece
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Queen.#ctor(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Create a new Queen
+            </summary>
+            <param name="x">The x coord of the piece</param>
+            <param name="y">The y coord of the piece</param>
+            <param name="colour">The colour of the piece</param>
+        </member>
+        <member name="M:ChessClient.Game.Queen.GetMoves(ChessClient.Game.Board,System.Boolean)">
+            <summary>
+            Get all possible moves including moves that cause friendly king to be in check
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="check">Whether to remove moves that endanger king (can cause recursion errors)</param>
+        </member>
+        <member name="T:ChessClient.Game.Rook">
+            <summary>
+            The Rook Piece
+            </summary>
+        </member>
+        <member name="M:ChessClient.Game.Rook.#ctor(System.Int32,System.Int32,System.Drawing.Color)">
+            <summary>
+            Create a new Rook
+            </summary>
+            <param name="x">The x coord of the piece</param>
+            <param name="y">The y coord of the piece</param>
+            <param name="colour">The colour of the piece</param>
+        </member>
+        <member name="M:ChessClient.Game.Rook.GetMoves(ChessClient.Game.Board,System.Boolean)">
+            <summary>
+            Get all possible moves including moves that cause friendly king to be in check
+            </summary>
+            <param name="board">The board that this piece is on</param>
+            <param name="check">Whether to remove moves that endanger king (can cause recursion errors)</param>
+        </member>
+        <member name="T:ChessClient.IpField">
+            <summary>
+            IPv4 input control
+            </summary>
+        </member>
+        <member name="F:ChessClient.IpField._textBoxes">
+            <summary>
+            The 4 input text boxes
+            </summary>
+        </member>
+        <member name="F:ChessClient.IpField._labels">
+            <summary>
+            The 3 labels to separate the text boxes
+            </summary>
+        </member>
+        <member name="P:ChessClient.IpField.Ip">
+            <summary>
+            The IP from the 4 text boxes as a string
+            </summary>
+        </member>
+        <member name="P:ChessClient.IpField.IpAddress">
+            <summary>
+            The IP from the 4 text boxes as an IPAdress
+            </summary>
+        </member>
+        <member name="F:ChessClient.IpField.OnComplete">
+            <summary>
+            What happens when pressing enter on the last textbox
+            </summary>
+        </member>
+        <member name="M:ChessClient.IpField.#ctor">
+            <summary>
+            Create a new IPField
+            </summary>
+        </member>
+        <member name="M:ChessClient.IpField.DefaultIp">
+            <summary>
+            Set the default IP
+            </summary>
+        </member>
+        <member name="M:ChessClient.IpField.SetIp(System.Byte[])">
+            <summary>
+            Set the ip in the control
+            </summary>
+            <param name="bytes">The ip address to set</param>
+        </member>
+        <member name="M:ChessClient.IpField.UpdateIp">
+            <summary>
+            Convert the text boxes to an actual IP
+            </summary>
+        </member>
+        <member name="M:ChessClient.IpField.IPField_SizeChanged(System.Object,System.EventArgs)">
+            <summary>
+            Change the textbox and label sizes when resized
+            </summary>
+            <param name="sender">The control that fired the event</param>
+            <param name="e">Additional info from the event</param>
+        </member>
+        <member name="F:ChessClient.IpField.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ChessClient.IpField.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ChessClient.IpField.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ChessClient.Net.Client">
+            <summary>
+            A client to communicate with the server
+            </summary>
+        </member>
+        <member name="P:ChessClient.Net.Client.GlobalPacketId">
+            <summary>
+            Used as an unique identifier for sent packets
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client.ServerPort">
+            <summary>
+            The port of the server
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client._localPort">
+            <summary>
+            The port the server will use to connect to this client
+            </summary>
+        </member>
+        <member name="P:ChessClient.Net.Client.ClientName">
+            <summary>
+            The name of the user
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client._listener">
+            <summary>
+            Socket to receive packets from the server
+            </summary>
+        </member>
+        <member name="M:ChessClient.Net.Client.DisposeSocket">
+            <summary>
+            Disposes the socket to stop listening
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client._referenceGamePacket">
+            <summary>
+            To store the board object when returning the packet
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client._sender">
+            <summary>
+            To send packets to the server
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client._returns">
+            <summary>
+            The List of Packets and corresponding bytes that the server has returned from a message
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client._wantedReturns">
+            <summary>
+            The list of Packets that the Clients what the server to respond to
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client.IsRunning">
+            <summary>
+            Is the client running?
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client.CurrentForm">
+            <summary>
+            The form the client is currently using
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Client._history">
+            <summary>
+            History of received packets
+            </summary>
+        </member>
+        <member name="M:ChessClient.Net.Client.#ctor(System.Net.IPAddress,System.String,System.Byte)">
+            <summary>
+            Create a new Client
+            </summary>
+            <param name="ip"></param>
+            <param name="name"></param>
+            <param name="startingPacketNo">The globalPacketId to start with</param>
+        </member>
+        <member name="M:ChessClient.Net.Client.ReceiveThread">
+            <summary>
+            While running constantly loops to listen for packets
+            </summary>
+        </member>
+        <member name="M:ChessClient.Net.Client.GetServer">
+            <summary>
+            Find a server on a local network
+            </summary>
+            <returns>The IP of the server, or the local ip if it fails</returns>
+        </member>
+        <member name="M:ChessClient.Net.Client.InterpretRequest(System.Collections.Generic.IReadOnlyList{System.Byte})">
+            <summary>
+            Cause client updates based on received data
+            </summary>
+            <param name="data">The data that was received</param>
+        </member>
+        <member name="M:ChessClient.Net.Client.SendMessage(ChessClient.Net.Packet.Packets,System.String[])">
+            <summary>
+            Send a message to the server
+            </summary>
+            <param name="code">The type of packet</param>
+            <param name="messages">The message to send</param>
+            <returns>TUPLE[PACKET, BYTE[]]: The returned packet and it's bytes</returns>
+        </member>
+        <member name="T:ChessClient.Net.Packet">
+            <summary>
+            A packet to communicate between the client and server
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet._packetId">
+            <summary>
+            The id of the packet
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet._senderPort">
+            <summary>
+            Port that the sender uses to receive messages
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.SenderAddress">
+            <summary>
+            The address this packet originated from
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Code">
+            <summary>
+            What type of packet it is
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Message">
+            <summary>
+            The message that gets sent
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.ReturnMessage">
+            <summary>
+            If this packet is a return message, the original message
+            </summary>
+        </member>
+        <member name="M:ChessClient.Net.Packet.#ctor(System.Byte,System.UInt16,ChessClient.Net.Packet.Packets,System.String[])">
+            <summary>
+            Create a new packet
+            </summary>
+            <param name="globalPacketId">The unique id for this packet</param>
+            <param name="port">The port that the sender is using to receive</param>
+            <param name="code">The type of packet</param>
+            <param name="message">The packets message</param>
+        </member>
+        <member name="M:ChessClient.Net.Packet.SetReurnLink(ChessClient.Net.Packet)">
+            <summary>
+            Set that this packet is a return message
+            </summary>
+            <param name="packet">The original message</param>
+        </member>
+        <member name="M:ChessClient.Net.Packet.SetSenderAddress(System.Net.IPAddress)">
+            <summary>
+            Construct the sender's Address from a IP and port
+            </summary>
+            <param name="ip">The ip to use</param>
+        </member>
+        <member name="M:ChessClient.Net.Packet.#ctor(System.Collections.Generic.IEnumerable{System.Byte})">
+            <summary>
+            Create a new Packet
+            </summary>
+            <param name="data">The compressed serialize packet</param>
+        </member>
+        <member name="M:ChessClient.Net.Packet.GetData">
+            <summary>
+            Serialize and compress this packet
+            </summary>
+            <returns>BYTE[]: Serialize and compressed bytes</returns>
+        </member>
+        <member name="M:ChessClient.Net.Packet.Equals(System.Object)">
+            <summary>
+            Check if two objects are equal
+            </summary>
+            <param name="obj">The object to compare this to</param>
+            <returns>BOOL: If all the fields are equal</returns>
+        </member>
+        <member name="M:ChessClient.Net.Packet.GetHashCode">
+            <summary>
+            Need to override when overriding Equals
+            </summary>
+            <returns>Something that two equal packets will have in common, 
+            but does not make them common</returns>
+        </member>
+        <member name="T:ChessClient.Net.Packet.Packets">
+            <summary>
+            Enum of packet codes
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.Error">
+            <summary>
+            A error packet
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.Ping">
+            <summary>
+            Simple no use packet
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.Connect">
+            <summary>
+            Client connect packet
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.Disconnect">
+            <summary>
+            Client disconnect packet
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.Info">
+            <summary>
+            Packet contains info about games or players
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.Chat">
+            <summary>
+            Packet containing a chat message
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.Game">
+            <summary>
+            Packet about a game event
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.DisconnectGame">
+            <summary>
+            Packet about a client leaving a game
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.FindServer">
+            <summary>
+            The client asking for the server's ip address
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.GameEnd">
+            <summary>
+            Packet for when a game ends or is going to end
+            </summary>
+        </member>
+        <member name="F:ChessClient.Net.Packet.Packets.FakeGame">
+            <summary>
+            Not really a packet, just a serialized board object
+            </summary>
+        </member>
+        <member name="M:ChessClient.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:ChessClient.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.BoardIcon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.ChessPieces">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.DrawGame">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.KnightIcon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.LeaveGame">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.ResignGame">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.TakebackMove">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:ChessClient.Properties.Resources.WifiIcon">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+            </summary>
+        </member>
+    </members>
+</doc>
