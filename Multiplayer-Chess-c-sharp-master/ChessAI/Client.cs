@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -64,13 +64,6 @@ namespace ChessAI {
         private readonly Queue<Packet> _history = new Queue<Packet>(20);
 
         //public ChessGame CurrentGame;
-
-        /// <summary>
-        /// Create a new Client
-        /// </summary>
-        /// <param name="ip"></param>
-        /// <param name="name"></param>
-        /// <param name="startingPacketNo">The globalPacketId to start with</param>
         public Client(IPAddress ip, string name, byte startingPacketNo) {
             ClientName = name;
             _listener = new Socket(SocketType.Dgram, ProtocolType.Udp);
