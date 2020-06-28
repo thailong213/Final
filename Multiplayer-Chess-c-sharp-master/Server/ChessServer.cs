@@ -1439,7 +1439,15 @@ namespace Server {
                 return (p == 4) || (p == 6) || (p == 128);
             }
         }
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int cmdShow);
 
+        [DllImport("user32.dll")]
+        private static extern int SendMessage(IntPtr hwnd, int message, int wParam, IntPtr lParam);
+
+        private static void Maximize() {
+            var p = Process.GetCurrentProcess();
+            ShowWindow(p.MainWindowHandle, 3); //SW_MAXIMIZE = 3
         
         }
     }
