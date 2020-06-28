@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,35 +19,44 @@ namespace Connect_SQL
         public Login()
         {
             InitializeComponent();
-            con.ConnectionString = @"Data Source=ADMIN\SQLEXPRESS;Initial Catalog=User;Integrated Security=True";
+            con.ConnectionString = @"Data Source=DESKTOP-R3TAL84\MSSQLSERVER01;
+                                     Initial Catalog=User;
+                                     Integrated Security=True";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             con.Open();
             com.Connection = con;
-            com.CommandText = "select * from AUTH";
+            com.CommandText = "select * from AUTH " +
+                              "where Username = '" + txtUsername.Text + 
+                              "' AND Password = '" + txtPassword.Text + "'";
+
+
+
             SqlDataReader dr = com.ExecuteReader();
-            while (dr.Read()){
+            while (dr.Read())
+            {
                 for(int i=0 ; i<=dr.FieldCount ; i++)
                 {
                     if (txtUsername.Text.Equals(dr["Username"].ToString().TrimEnd()) &&
-                        txtPassword.Text.Equals(dr["Password"].ToString().TrimEnd())){
+                        txtPassword.Text.Equals(dr["Password"].ToString().TrimEnd()))
+                    {
                         MessageBox.Show("Congrates", "Login", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Transfer a = new Transfer();
-                        a.Show();
-                        this.Hide();
                         break;
                     }
-                    else{
+                    else
+                    {
                         MessageBox.Show("Fail", "fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
                 }
             }
-            con.Close();}
+            con.Close();
+        }
 
-        private void button2_Click(object sender, EventArgs e){
+        private void button2_Click(object sender, EventArgs e)
+        {
             Register a = new Register();
             a.Show();
             this.Hide();
