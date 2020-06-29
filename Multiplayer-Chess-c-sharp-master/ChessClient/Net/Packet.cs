@@ -6,6 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO.Compression;
 using System.Net;
 
+//Đăng Khoa đã sửa lần 3
+
 namespace ChessClient.Net {
     /// <summary>
     /// A packet to communicate between the client and server
