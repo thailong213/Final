@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using ChessClient.Forms;
 using NATUPNPLib;
 
+//Dang Khoa da sua
+
 namespace ChessClient.Net {
     /// <summary>
     /// A client to communicate with the server
