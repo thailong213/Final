@@ -950,6 +950,7 @@ namespace Server {
         /// <param name="code">The packet code</param>
         /// <param name="fakeMessage">The fake message</param>
         /// <param name="sendMessages">The message to send</param>
+      
         private void SendPacketToAllPlayers(IPEndPoint address, Packet.Packets code, string fakeMessage, params string[] sendMessages) {
             // Remove the address from the list of connected players
             var copyList = _connected.Select(p => p.Item1).ToList();
@@ -1143,26 +1144,11 @@ namespace Server {
             if (disposing) {
                 _client.Close();
                 _listener.Close();
-                _httpListener.Close();
             }
             _disposed = true;
         }
 
-        
 
-        private byte[] GetPlayersPage(string responseStringStart) {
-            // Combine the list of every connected players name and what they are doing
-            var responseStringMiddle = "<p>Players connected: " + _connected.Count + "</p>\n" +
-                    _connected.Aggregate("<p>", (current, player) =>
-                        current + (player.Item2 + " is " +
-                        (player.Item3.Equals("ServerView") ? "in the Server List" :
-                        (player.Item3.Equals("Watching") ? "watching a game" :
-                        " playing a game called " + player.Item3)) +
-                        "<br>")).TrimEnd(',') + "</p>\n";
-            return Encoding.UTF8.GetBytes(responseStringStart + responseStringMiddle + ResponseStringEnd);
-        }
-
-     
         /// <summary>
         /// Main method
         /// </summary>
@@ -1198,6 +1184,7 @@ namespace Server {
                 return (p == 4) || (p == 6) || (p == 128);
             }
         }
+
         [DllImport("user32.dll")]
         private static extern bool ShowWindow(IntPtr hWnd, int cmdShow);
 
@@ -1207,7 +1194,6 @@ namespace Server {
         private static void Maximize() {
             var p = Process.GetCurrentProcess();
             ShowWindow(p.MainWindowHandle, 3); //SW_MAXIMIZE = 3
-        
         }
     }
 }
